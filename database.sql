@@ -39,3 +39,10 @@ CREATE TABLE qr_tokens (
     FOREIGN KEY (patient_id) REFERENCES users(user_id)
         ON DELETE CASCADE
 );
+
+select * from users;
+
+#To reset any table
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE users;
+SET FOREIGN_KEY_CHECKS = 1;
