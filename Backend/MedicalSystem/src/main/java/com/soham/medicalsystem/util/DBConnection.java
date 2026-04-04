@@ -13,10 +13,8 @@ public class DBConnection {
 
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Connected to database successfully!");
         } catch (SQLException e) {
-            System.out.println("Database connection failed!");
-            e.printStackTrace();
+            throw new RuntimeException("Error connecting to the database ", e);
         }
 
         return connection;
