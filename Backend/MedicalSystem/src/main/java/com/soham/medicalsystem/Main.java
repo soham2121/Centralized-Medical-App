@@ -1,15 +1,10 @@
 package com.soham.medicalsystem;
 
-import com.soham.medicalsystem.util.DBConnection;
-import com.soham.medicalsystem.model.User;
 import com.soham.medicalsystem.dao.UserDao;
-
-import java.sql.Connection;
+import com.soham.medicalsystem.model.User;
 
 public class Main {
     public static void main(String[] args) {
-        Connection conn = DBConnection.getConnection();
-
         UserDao dao = new UserDao();
 
 //        User user = new User("Soham", "test@mail.com", "1234", "PATIENT", null);
