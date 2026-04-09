@@ -32,7 +32,7 @@ CREATE TABLE medical_records (
 );
 
 CREATE TABLE qr_tokens (
-    token_id VARCHAR(100) PRIMARY KEY,
+    token_id VARCHAR(100) UNIQUE PRIMARY KEY,
     patient_id INT NOT NULL,
     expiry_time DATETIME NOT NULL,
     is_active BOOLEAN DEFAULT TRUE,
