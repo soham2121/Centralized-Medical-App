@@ -120,4 +120,29 @@ public class UserDao {
             throw new RuntimeException("Error updating user hospital ", e);
         }
     }
+
+    public User getDocName(int userId){
+        String query = "SELECT user_id, name, email, role, hospital_id FROM users WHERE user_id = ?";
+
+        try(Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+        ){
+            ps.setInt(1, userId);
+            ResultSet result  = ps.executeQuery();
+            if (!result.next()) { return null; }
+
+            if(result.getString("role").equals("DOCTOR")) {
+                User user = new User();
+                user.setUserId(result.getInt("user_id"));
+                user.setName(result.getString("name"));
+                user.setEmail(result.getString("email"));
+                user.setRole(result.getString("role"));
+                user.setHospitalId(result.getInt("hospital_id"));
+                return user;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting doctor ", e);
+        }
+    }
 }

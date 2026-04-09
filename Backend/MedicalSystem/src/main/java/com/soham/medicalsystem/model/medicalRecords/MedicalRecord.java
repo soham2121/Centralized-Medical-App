@@ -32,5 +32,5 @@ public abstract class MedicalRecord {
     public LocalDateTime getDate() { return date; }
     public void setDate(LocalDateTime date) { this.date = date; }
 
-    public abstract String getDetails();
+    public abstract Object getDetails();
 }

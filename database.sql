@@ -23,8 +23,8 @@ CREATE TABLE medical_records (
     patient_id INT NOT NULL,
     created_by INT,
     record_type ENUM('BLOOD_TEST', 'SCAN', 'PRESCRIPTION') NOT NULL,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
     details TEXT,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (patient_id) REFERENCES users(user_id)
         ON DELETE CASCADE,
     FOREIGN KEY (created_by) REFERENCES users(user_id)
@@ -41,6 +41,7 @@ CREATE TABLE qr_tokens (
 );
 
 select * from users;
+select * from medical_records;
 
 #To reset any table
 SET FOREIGN_KEY_CHECKS = 0;

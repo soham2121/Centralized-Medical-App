@@ -1,5 +1,8 @@
 package com.soham.medicalsystem.model.medicalRecords;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BloodTest extends MedicalRecord{
     private double hemoglobin;
     private double sugarLevel;
@@ -22,7 +25,11 @@ public class BloodTest extends MedicalRecord{
     public void setSugarLevel(double sugarLevel) { this.sugarLevel = sugarLevel; }
 
     @Override
-    public String getDetails(){
-        return "Blood Test -> Hemoglobin " + hemoglobin + " Sugar Level " + sugarLevel;
+    public Object getDetails(){
+        Map<String, Object> data = new HashMap<>();
+        data.put("type", "BLOOD_TEST");
+        data.put("hemoglobin", hemoglobin);
+        data.put("sugarLevel", sugarLevel);
+        return data;
     }
 }

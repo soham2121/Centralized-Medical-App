@@ -1,5 +1,8 @@
 package com.soham.medicalsystem.model.medicalRecords;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ScanRecord extends MedicalRecord{
     private String scanType;
     private String findings;
@@ -22,7 +25,11 @@ public class ScanRecord extends MedicalRecord{
     public void setFindings(String findings) { this.findings = findings; }
 
     @Override
-    public String getDetails(){
-        return "Scan Type: " + scanType + " Findings " + findings;
+    public Object getDetails(){
+        Map<String, Object> data = new HashMap<>();
+        data.put("type", "SCAN");
+        data.put("scanType", scanType);
+        data.put("findings", findings);
+        return data;
     }
 }

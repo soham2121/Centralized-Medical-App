@@ -2,6 +2,7 @@ package com.soham.medicalsystem.model.medicalRecords;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PrescriptionRecord extends MedicalRecord {
 
@@ -37,8 +38,26 @@ public class PrescriptionRecord extends MedicalRecord {
     }
 
     @Override
-    public String getDetails() {
-        return "Prescription -> Medicines: " + medicines +
-                (doctorNotes != null ? ", Notes: " + doctorNotes : "");
+    public Object getDetails() {
+        List<Map<String, Object>> medsList = new ArrayList<>();
+
+        for (Medicine med : medicines) {
+            java.util.Map<String, Object> medData = new java.util.HashMap<>();
+
+            medData.put("name", med.getName());
+            medData.put("dosage", med.getDosage());
+            medData.put("timing", med.getTiming());
+            medData.put("duration", med.getDuration());
+            medData.put("notes", med.getNotes());
+
+            medsList.add(medData);
+        }
+
+        java.util.Map<String, Object> result = new java.util.HashMap<>();
+        result.put("type", "PRESCRIPTION");
+        result.put("medicines", medsList);
+        result.put("doctorNotes", doctorNotes);
+
+        return result;
     }
 }
