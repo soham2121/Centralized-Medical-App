@@ -42,6 +42,7 @@ CREATE TABLE qr_tokens (
 
 select * from users;
 select * from medical_records;
+select * from qr_tokens;
 
 #To reset any table
 SET FOREIGN_KEY_CHECKS = 0;

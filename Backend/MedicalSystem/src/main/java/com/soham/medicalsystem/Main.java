@@ -3,6 +3,7 @@ package com.soham.medicalsystem;
 import com.soham.medicalsystem.dao.*;
 import com.soham.medicalsystem.model.*;
 import com.soham.medicalsystem.model.medicalRecords.*;
+import com.soham.medicalsystem.service.MedicalService;
 
 import java.util.List;
 
@@ -10,9 +11,17 @@ public class Main {
     public static void main(String[] args) {
         //TestUsers();
         //TestMedicalRecords();
-        UserDao dao = new UserDao();
-        User doctor = dao.getDocName(2);
-        System.out.println(doctor.getName() + " " + doctor.getEmail() + " " + doctor.getRole());
+        QRDao dao = new QRDao();
+        QRToken token = dao.createToken(1);
+
+        MedicalService service = new MedicalService();
+
+        BloodTest record = new BloodTest();
+        record.setHemoglobin(13.5);
+        record.setSugarLevel(90);
+        record.setCreatedBy(2);
+
+        service.addRecordUsingToken(token.getTokenId(), record);
     }
 
     private static void TestMedicalRecords() {
