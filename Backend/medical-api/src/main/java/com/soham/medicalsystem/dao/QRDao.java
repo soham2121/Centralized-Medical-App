@@ -11,6 +11,8 @@ public class QRDao {
 
         try(Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(query)){
+            deactivateAllTokensForPatient(patientId);
+
             QRToken token = new QRToken(patientId);
 
             ps.setString(1, token.getTokenId());
@@ -65,6 +67,20 @@ public class QRDao {
             ps.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException("Error deactivating token ", e);
+        }
+    }
+
+    public void deactivateAllTokensForPatient(int patientId) {
+        String query = "UPDATE qr_tokens SET is_active = false WHERE patient_id = ? AND is_active = true";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, patientId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deactivating old tokens", e);
         }
     }
 }

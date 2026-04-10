@@ -40,11 +40,14 @@ CREATE TABLE qr_tokens (
         ON DELETE CASCADE
 );
 
+INSERT INTO users (name, email, password, role, hospital_id)
+VALUES ('Test', 'test@mail.com', '1234', 'PATIENT', NULL);
+
 select * from users;
 select * from medical_records;
 select * from qr_tokens;
 
 #To reset any table
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE qr_tokens;
+TRUNCATE TABLE medical_records;
 SET FOREIGN_KEY_CHECKS = 1;

@@ -4,6 +4,8 @@ import com.soham.medicalsystem.model.User;
 import com.soham.medicalsystem.util.DBConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
     public boolean addUser(User user){
@@ -144,6 +146,26 @@ public class UserDao {
             return null;
         } catch (SQLException e) {
             throw new RuntimeException("Error getting doctor ", e);
+        }
+    }
+
+    public List<User> getAllUsers() {
+        String query = "SELECT user_id, name, email, role, hospital_id FROM users";
+        List<User> users = new ArrayList<>();
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                User u = new User();
+                u.setUserId(rs.getInt("user_id"));
+                u.setName(rs.getString("name"));
+                u.setEmail(rs.getString("email"));
+                u.setRole(rs.getString("role"));
+                users.add(u);
+            }
+            return users;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching users", e);
         }
     }
 }
