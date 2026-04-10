@@ -46,5 +46,5 @@ select * from qr_tokens;
 
 #To reset any table
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE users;
+TRUNCATE TABLE qr_tokens;
 SET FOREIGN_KEY_CHECKS = 1;
