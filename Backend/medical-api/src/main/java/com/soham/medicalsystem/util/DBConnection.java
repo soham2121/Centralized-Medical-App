@@ -4,9 +4,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/medicalSystem";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Soham@2121";
+    private static String URL = System.getenv("SPRING_DATASOURCE_URL");
+    private static String USER = System.getenv("SPRING_DATASOURCE_USERNAME");
+    private static String PASSWORD = System.getenv("SPRING_DATASOURCE_PASSWORD");
+
+    static {
+        if (URL == null) {
+            URL = "jdbc:mysql://metro.proxy.rlwy.net:38491/railway?useSSL=false&allowPublicKeyRetrieval=true";
+            USER = "root";
+            PASSWORD = "ntRCLYuiXdBSwXXCKuXwRdkstwfUusud";
+        }
+    }
 
     public static Connection getConnection() {
         Connection connection = null;

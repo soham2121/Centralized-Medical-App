@@ -41,7 +41,7 @@ CREATE TABLE qr_tokens (
 );
 
 INSERT INTO users (name, email, password, role, hospital_id)
-VALUES ('Test', 'test@mail.com', '1234', 'PATIENT', NULL);
+VALUES ('Admin', 'admin@gmail.com', '123456', 'ADMIN', NULL);
 
 select * from users;
 select * from medical_records;
@@ -49,5 +49,5 @@ select * from qr_tokens;
 
 #To reset any table
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE medical_records;
+TRUNCATE TABLE qr_tokens;
 SET FOREIGN_KEY_CHECKS = 1;
