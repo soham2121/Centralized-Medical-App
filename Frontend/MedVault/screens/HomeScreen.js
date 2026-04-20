@@ -78,6 +78,11 @@ export default function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Register")}
             variant="ghost"
           />
+          <Button
+            title="Emergency Card"
+            onPress={() => navigation.navigate("Emergency")}
+            style={{ marginTop: Spacing.md, backgroundColor: 'red'}}
+          />
         </Animated.View>
 
         {/* Feature pills */}

@@ -11,6 +11,8 @@ import DoctorScreen      from "../screens/DoctorScreen";
 import AdminScreen       from "../screens/AdminScreen";
 import ViewRecordsScreen from "../screens/ViewRecordsScreen";
 import SettingsScreen    from "../screens/SettingsScreen";
+import EmergencyScreen   from "../screens/EmergencyScreen";
+import ProfileScreen     from "../screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,7 +56,7 @@ export default function AppNavigator() {
         options={({ navigation }) => ({
           ...screenOptions(navigation),
           title: "Sign In",
-          headerRight: () => <SettingsButton navigation={navigation} />,
+          headerRight: undefined,
         })}
       />
       <Stack.Screen
@@ -63,7 +65,7 @@ export default function AppNavigator() {
         options={({ navigation }) => ({
           ...screenOptions(navigation),
           title: "Create Account",
-          headerRight: () => <SettingsButton navigation={navigation} />,
+          headerRight: undefined,
         })}
       />
       <Stack.Screen
@@ -109,6 +111,23 @@ export default function AppNavigator() {
           ...screenOptions(navigation),
           title: "Settings",
           headerRight: undefined,
+        })}
+      />
+      <Stack.Screen
+        name="Emergency"
+        component={EmergencyScreen}
+        options={({ navigation }) => ({
+          ...screenOptions(navigation),
+          title: "Emergency Profile 🚨",
+          headerRight: undefined,
+        })}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={({ navigation }) => ({
+          ...screenOptions(navigation),
+          title: "Profile",
         })}
       />
     </Stack.Navigator>

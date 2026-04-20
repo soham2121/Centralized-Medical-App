@@ -15,6 +15,7 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [loading,  setLoading]  = useState(false);
   const [error,    setError]    = useState("");
+  const [passwordTouched, setPasswordTouched] = useState(false);
 
   const fadeAnim  = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(30)).current;
@@ -47,6 +48,13 @@ export default function RegisterScreen({ navigation }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const checks = {
+    length: password.length >= 6,
+    uppercase: /[A-Z]/.test(password),
+    number: /\d/.test(password),
+    special: /[^A-Za-z0-9]/.test(password),
   };
 
   return (
@@ -95,9 +103,33 @@ export default function RegisterScreen({ navigation }) {
               label="Password"
               value={password}
               onChangeText={t => { setPassword(t); setError(""); }}
-              placeholder="Min. 6 characters"
+              placeholder="Abc@12"
               secureTextEntry
+              onFocus={() => setPasswordTouched(true)}
+              onBlur={() => setPasswordTouched(false)}
             />
+
+            {passwordTouched && (
+              <View style={{ marginBottom: 10 }}>
+                
+                <Text style={{ color: checks.length ? "green" : "red" }}>
+                  • Min 6 characters
+                </Text>
+
+                <Text style={{ color: checks.uppercase ? "green" : "red" }}>
+                  • 1 uppercase letter
+                </Text>
+
+                <Text style={{ color: checks.number ? "green" : "red" }}>
+                  • 1 number
+                </Text>
+
+                <Text style={{ color: checks.special ? "green" : "red" }}>
+                  • 1 special character
+                </Text>
+
+              </View>
+            )}
 
             {error ? (
               <View style={[styles.errorBox, { backgroundColor: theme.dangerDim, borderColor: theme.danger + '40' }]}>

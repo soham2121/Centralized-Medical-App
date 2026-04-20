@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import { useTheme } from "../theme/Themecontext";
 import { Typography, Spacing, Radius } from "../theme";
-import { Card, Divider } from "../components/UI";
+import { Card, Divider, Button } from "../components/UI";
 
 function SettingRow({ icon, title, subtitle, right, onPress, theme }) {
   const Wrapper = onPress ? TouchableOpacity : View;
@@ -23,7 +23,7 @@ function SettingRow({ icon, title, subtitle, right, onPress, theme }) {
   );
 }
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }) {
   const { theme, isDark, toggleTheme } = useTheme();
 
   return (
@@ -35,6 +35,14 @@ export default function SettingsScreen() {
           <Text style={[Typography.label, { color: theme.primary }]}>PREFERENCES</Text>
           <Text style={[Typography.h1, { color: theme.text }]}>Settings</Text>
         </View>
+
+        <Text style={[Typography.label, { color: theme.textMuted, marginBottom: Spacing.sm }]}>MY PROFILE</Text>
+        <Card style={{ marginBottom: Spacing.lg }}>
+          <Button
+            title="Edit Emergency Profile"
+            onPress={() => navigation.navigate("Profile")}
+          />
+        </Card>
 
         {/* Appearance */}
         <Text style={[Typography.label, { color: theme.textMuted, marginBottom: Spacing.sm }]}>APPEARANCE</Text>
